@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list">
+        <item>list_1</item>
+        <item>list_2</item>
+        <item>list_3</item>
+    </string-array>
+
+    <string-array name="text_of_notes">
+        <item>@string/some1</item>
+        <item>@string/some2</item>
+        <item>@string/some3</item>
+    </string-array>
+</resources>

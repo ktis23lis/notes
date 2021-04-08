@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="some_text">some textsome textsome textsome text some textsome textsome textsome textsome textsome text some textsome textsome textsome textsome textsome text</string>
+    <string name="some1">1111111111some textsome textsome textsome textsome textsome textsome text
+        some textsome textsome textsome textsome textsome textsome textsome text
+        some textsome textsome textsome textsome textsome textsome textsome text
+    some textsome textsome textsome textsome textsome textsome text</string>
+    <string name="some2">22222222222some textsome textsome textsome textsome textsome textsome text
+        some textsome textsome textsome textsome textsome textsome textsome text
+        some textsome textsome textsome textsome textsome textsome textsome text
+    some textsome textsome textsome textsome textsome textsome text</string>
+    <string name="some3">3333333333some textsome textsome textsome textsome textsome textsome text
+        some textsome textsome textsome textsome textsome textsome textsome text
+        some textsome textsome textsome textsome textsome textsome textsome text
+    some textsome textsome textsome textsome textsome textsome text</string>
+</resources>
