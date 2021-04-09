@@ -1,12 +1,18 @@
 package com.example.notes;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,8 +20,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.Calendar;
 
 
 public class ListFragment extends Fragment {
@@ -30,6 +38,7 @@ public class ListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_list, container,false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle
             savedInstanceState) {
@@ -37,6 +46,7 @@ public class ListFragment extends Fragment {
         initList(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initList(View view){
         LinearLayout layoutView = (LinearLayout)view;
         String[]lists = getResources().getStringArray(R.array.list);
@@ -46,6 +56,14 @@ public class ListFragment extends Fragment {
             tv.setText(list);
             tv.setTextSize(30);
             layoutView.addView(tv);
+
+
+            if (notesCurrent.dateArray.size() > 0) {
+                TextView date = new TextView(getContext());
+                date.setText(notesCurrent.dateArray.get(0));
+                layoutView.addView(date);
+
+            }
             final int finalInt = i;
             tv.setOnClickListener(v -> {
                 notesCurrent = new NameNotes(finalInt,getResources().getStringArray(R.array.list)[finalInt]);
@@ -53,6 +71,7 @@ public class ListFragment extends Fragment {
             });
         }
     }
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelable(CURRENT_LIST, notesCurrent);
@@ -65,7 +84,6 @@ public class ListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         isLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-
         if (savedInstanceState !=null){
             notesCurrent = savedInstanceState.getParcelable(CURRENT_LIST);
         }else {
@@ -87,12 +105,11 @@ public class ListFragment extends Fragment {
 
     private void showLandText(NameNotes notesCurrent){
         TextFragment textFragment = TextFragment.newInstance(notesCurrent);
-
         FragmentManager fragmentManager =
                 requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragent_container,textFragment);
+        fragmentTransaction.replace(R.id.text_fregment,textFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
 
@@ -104,4 +121,6 @@ public class ListFragment extends Fragment {
         intent.putExtra(TextFragment.ARG_NAME, notesCurrent);
         startActivity(intent);
     }
+
+
 }
