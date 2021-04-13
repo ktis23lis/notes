@@ -54,14 +54,10 @@ public class TextFragment extends Fragment {
         TypedArray text = getResources().obtainTypedArray(R.array.text_of_notes);
         editTextOfText.setText(text.getResourceId(nameNotes.getTextIndex(), -1));
         dateTextView1 = (TextView)view.findViewById(R.id.dateTextView1);
-//        nameNotes.setDateIndex(nameNotes.getTextIndex());
+
         TextView notesNameView = view.findViewById(R.id.textViewNameNotes);
         notesNameView.setText(nameNotes.getName());
-        handleDateListener();
-//        int a = text.getResourceId(nameNotes.getTextIndex(), -1);
-//        int b = text.getResourceId(nameNotes.getTextIndex(), -1);
-
-
+//        handleDateListener();
 
         return view;
     }

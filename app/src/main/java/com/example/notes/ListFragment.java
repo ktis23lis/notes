@@ -1,8 +1,5 @@
 package com.example.notes;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 
@@ -12,24 +9,24 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import java.util.Calendar;
 
 
 public class ListFragment extends Fragment {
-    public static final String CURRENT_LIST = "CurrentList";
+    public static final String CURRENT_TEXT = "CurrentText";
+    public static final String CURRENT_LIST = "CurrentLIST";
     private NameNotes notesCurrent;
     private boolean isLandscape;
+    private String list;
 
     @Nullable
     @Override
@@ -48,17 +45,17 @@ public class ListFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initList(View view){
-        LinearLayout layoutView = (LinearLayout)view;
+        LinearLayout layoutView = (LinearLayout) view;
         String[]lists = getResources().getStringArray(R.array.list);
         for (int i = 0; i < lists.length; i++){
-            String list = lists[i];
+            list = lists[i];
             TextView tv = new TextView(getContext());
             tv.setText(list);
             tv.setTextSize(30);
             layoutView.addView(tv);
 
 
-            if (notesCurrent.dateArray.size() > 0) {
+            if (notesCurrent != null && notesCurrent.dateArray.size() > 0) {
                 TextView date = new TextView(getContext());
                 date.setText(notesCurrent.dateArray.get(0));
                 layoutView.addView(date);
@@ -74,7 +71,8 @@ public class ListFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelable(CURRENT_LIST, notesCurrent);
+        outState.putParcelable(CURRENT_TEXT, notesCurrent);
+//        outState.putString(CURRENT_LIST,list);
         super.onSaveInstanceState(outState);
     }
 
@@ -85,7 +83,7 @@ public class ListFragment extends Fragment {
         isLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
         if (savedInstanceState !=null){
-            notesCurrent = savedInstanceState.getParcelable(CURRENT_LIST);
+            notesCurrent = savedInstanceState.getParcelable(CURRENT_TEXT);
         }else {
             notesCurrent = new NameNotes(0,
                     getResources().getStringArray(R.array.list)[0]);
@@ -112,6 +110,7 @@ public class ListFragment extends Fragment {
         fragmentTransaction.replace(R.id.text_fregment,textFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
+
 
     }
 
