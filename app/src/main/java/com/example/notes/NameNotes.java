@@ -40,10 +40,18 @@ public class NameNotes implements Parcelable {
 
     }
 
+    public String getText() {
+        return text;
+    }
 
     public NameNotes(int textIndex, String name) {
         this.textIndex = textIndex;
         this.name = name;
+    }
+
+    public NameNotes( String name, String text) {
+        this.name = name;
+        this.text = text;
     }
 
     protected NameNotes(Parcel in) {

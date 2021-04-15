@@ -50,12 +50,13 @@ public class TextFragment extends Fragment {
     @Override
     public View onCreateView( LayoutInflater inflater,  ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_text,container,false);
-        TextView editTextOfText = view.findViewById(R.id.text_fregment);
-        TypedArray text = getResources().obtainTypedArray(R.array.text_of_notes);
-        editTextOfText.setText(text.getResourceId(nameNotes.getTextIndex(), -1));
-        dateTextView1 = (TextView)view.findViewById(R.id.dateTextView1);
 
-        TextView notesNameView = view.findViewById(R.id.textViewNameNotes);
+        TextView editTextOfText = view.findViewById(R.id.text_fregment);//место для текста
+        TypedArray text = getResources().obtainTypedArray(R.array.text_of_notes);// array для текста заметок
+//        dateTextView1 = (TextView)view.findViewById(R.id.dateTextView1); место для даты пока не актуально
+        TextView notesNameView = view.findViewById(R.id.textViewNameNotes); //имя заметки
+
+         editTextOfText.setText(text.getResourceId(nameNotes.getTextIndex(), -1));
         notesNameView.setText(nameNotes.getName());
 //        handleDateListener();
 
