@@ -6,19 +6,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TextFragment">
-
-  <TextView
-      android:id="@+id/textViewNameNotes"
+  <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:textSize="30sp"
-      android:text="TextView"/>
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewNameNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/dataTextViewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="111111111" />
+
+  </LinearLayout>
+
 
   <TextView
+      android:layout_weight="1"
       android:id="@+id/text_fregment"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:text="@string/some1"
       />
+
 
 </LinearLayout>

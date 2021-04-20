@@ -15,4 +15,15 @@
         some textsome textsome textsome textsome textsome textsome textsome text
         some textsome textsome textsome textsome textsome textsome textsome text
     some textsome textsome textsome textsome textsome textsome text</string>
+    <string name="search">search</string>
+    <string name="add_photo">add photo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="string_fragment_navigation">String fragment navigation</string>
+    <string name="about_app">о приложении</string>
+    <string name="settings">настройки</string>
+    <string name="about_my_app">Вы используете такое то приложение</string>
+    <string name="delete">delete</string>
+    <string name="add">add</string>
+    <string name="update">update</string>
 </resources>
