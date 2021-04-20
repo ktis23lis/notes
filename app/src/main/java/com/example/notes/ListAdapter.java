@@ -1,5 +1,6 @@
 package com.example.notes;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,11 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.SimpleDateFormat;
 
 public class ListAdapter
         extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
@@ -17,15 +22,13 @@ public class ListAdapter
     private NotesSource dataSource;
 //    private NameNotes nameNotes;
      private OnItemClickListener itemClickListener;
+     private final Fragment fragment;
+     private int menuPosition;
 
 
-//    public ListAdapter(String[] list) {
-//        this.list = list;
-//    }
-
-
-    public ListAdapter(NotesSource dataSource) {
+    public ListAdapter(NotesSource dataSource, Fragment fragment) {
         this.dataSource = dataSource;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -39,7 +42,6 @@ public class ListAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
-//        holder.getTextView().setText(list[position]);
         holder.setData(dataSource.getNameNotes(position));
         Log.d(TAG, "onBindViewHolder");
 
@@ -50,6 +52,10 @@ public class ListAdapter
     @Override
     public int getItemCount() {
         return dataSource.size();
+    }
+
+    public int getMenuPosition(){
+        return menuPosition;
     }
 
     public void SetOnItemClickListener(OnItemClickListener itemClickListener){
@@ -65,12 +71,16 @@ public class ListAdapter
 
         private TextView list;
         private TextView text;
+        private TextView data;
 
 
-        public ViewHolder(@NonNull View itemView) {
+
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             list = itemView.findViewById(R.id.textView);
             text = itemView.findViewById(R.id.textView2);
+            data = itemView.findViewById(R.id.dateTextViewList);
+            registerContextMenu(itemView);
             list.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,16 +88,35 @@ public class ListAdapter
                         itemClickListener.onItemClick(v, getAdapterPosition());
                 }
             });
+            text.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    menuPosition = getLayoutPosition();
+                    itemView.showContextMenu();
+                    return true;
+                }
+            });
         }
 
-//        public TextView getTextView(){
-//            return textView;
-//        }
+
+        private void registerContextMenu(@NonNull View itemView){
+            if(fragment !=null){
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                       menuPosition = getLayoutPosition();
+                        return false;
+                    }
+                });
+                fragment.registerForContextMenu(itemView);
+            }
+        }
+
+
         public void setData(NameNotes nameNotes){
             list.setText(nameNotes.getName());
             text.setText(nameNotes.getText());
+            data.setText(nameNotes.getDate());
         }
-
-
     }
 }

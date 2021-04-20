@@ -9,14 +9,21 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal">
+      android:orientation="vertical">
+
     <TextView
         android:id="@+id/textViewNameNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="TextView"/>
+        android:text="TextView"
+        android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/dataTextViewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="111111111" />
 
   </LinearLayout>
 
@@ -27,12 +34,6 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/some1"
-      />
-  <TextView
-      android:id="@+id/dateTextView1"
-      android:layout_width="match_parent"
-      android:layout_height="40dp"
-      android:textSize="30sp"
       />
 
 
