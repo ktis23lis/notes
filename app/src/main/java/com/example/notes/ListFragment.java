@@ -1,6 +1,8 @@
 package com.example.notes;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 
@@ -119,14 +121,38 @@ public class ListFragment extends Fragment {
                 });
                 return true;
             case R.id.delete:
-                int deletePosition = adapter.getMenuPosition();
-                data.deleteNotesData(deletePosition);
-                adapter.notifyItemRemoved(deletePosition);
-                return true;
+                AlertDialog.Builder builderDelete = new
+                        AlertDialog.Builder(getActivity());
+                builderDelete.setTitle(R.string.name_builder).
+                                setMessage(R.string.text_builder)
+                                .setPositiveButton(R.string.ok,
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                int deletePosition = adapter.getMenuPosition();
+                                                data.deleteNotesData(deletePosition);
+                                                adapter.notifyItemRemoved(deletePosition);
+                                            }
+                                        });
+                        AlertDialog dialogDelete = builderDelete.create();
+                dialogDelete.show();
+                        return false;
             case R.id.action_clear:
-                data.clearNotesData();
-                adapter.notifyDataSetChanged();
-                return true;
+                AlertDialog.Builder builderClear = new
+                        AlertDialog.Builder(getActivity());
+                builderClear.setTitle(R.string.name_builder).
+                        setMessage(R.string.text_all_builder)
+                        .setPositiveButton(R.string.ok,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        data.clearNotesData();
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                });
+                AlertDialog dialogClear = builderClear.create();
+                dialogClear.show();
+                return false;
         }
         return false;
     }
@@ -149,10 +175,6 @@ public class ListFragment extends Fragment {
         animator.setAddDuration(MY_DEFAULT_DURATION);
         animator.setRemoveDuration(MY_DEFAULT_DURATION);
         recyclerView.setItemAnimator(animator);
-//        if (moveToLastPosition){
-//            recyclerView.smoothScrollToPosition(data.size() - 1);
-//            moveToLastPosition = false;
-//        }
         if (moveToFirstPosition && data.size()>0){
             recyclerView.smoothScrollToPosition(0);
             moveToFirstPosition = false;
