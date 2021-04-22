@@ -2,28 +2,57 @@ package com.example.notes;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class NameNotes implements Parcelable {
-
+    private String id;
     private int textIndex;
     private String name;
     private String text;
     private String date;
+
+
+
+    public String getText() {
+        return text;
+    }
 
     public NameNotes(int textIndex, String name) {
         this.textIndex = textIndex;
         this.name = name;
     }
 
+    public NameNotes( String name, String text) {
+        this.name = name;
+        this.text = text;
+    }
+    public NameNotes( String name, String text, String date) {
+        this.name = name;
+        this.text = text;
+        this.date = date;
+    }
+
+    public NameNotes(String date) {
+        this.date = date;
+    }
+
     protected NameNotes(Parcel in) {
         textIndex = in.readInt();
         name = in.readString();
+        text = in.readString();
+        date = in.readString();
+
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(getTextIndex());
         dest.writeString(getName());
+        dest.writeString(getDate());
     }
 
     @Override
@@ -41,6 +70,7 @@ public class NameNotes implements Parcelable {
         public NameNotes[] newArray(int size) {
             return new NameNotes[size];
         }
+
     };
 
     public int getTextIndex() {
@@ -49,5 +79,17 @@ public class NameNotes implements Parcelable {
 
     public String getName() {
         return name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
