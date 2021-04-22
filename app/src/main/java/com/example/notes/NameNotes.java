@@ -4,41 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class NameNotes implements Parcelable {
-
+    private String id;
     private int textIndex;
     private String name;
     private String text;
     private String date;
-    private int dateIndex;
-    public ArrayList <String> dateArray;
 
-    public int getDateIndex() {
-        return dateIndex;
-    }
 
-    public void setDateIndex(int dateIndex) {
-        this.dateIndex = dateIndex;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void arrayAdd(int textIndex, String date){
-        dateArray.add(textIndex,date);
-    }
-
-    public void arrayGet(TextView textView, int i){
-        textView.setText(dateArray.get(i));
-
-    }
 
     public String getText() {
         return text;
@@ -53,16 +30,29 @@ public class NameNotes implements Parcelable {
         this.name = name;
         this.text = text;
     }
+    public NameNotes( String name, String text, String date) {
+        this.name = name;
+        this.text = text;
+        this.date = date;
+    }
+
+    public NameNotes(String date) {
+        this.date = date;
+    }
 
     protected NameNotes(Parcel in) {
         textIndex = in.readInt();
         name = in.readString();
+        text = in.readString();
+        date = in.readString();
+
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(getTextIndex());
         dest.writeString(getName());
+        dest.writeString(getDate());
     }
 
     @Override
@@ -80,6 +70,7 @@ public class NameNotes implements Parcelable {
         public NameNotes[] newArray(int size) {
             return new NameNotes[size];
         }
+
     };
 
     public int getTextIndex() {
@@ -90,5 +81,15 @@ public class NameNotes implements Parcelable {
         return name;
     }
 
+    public String getDate() {
+        return date;
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

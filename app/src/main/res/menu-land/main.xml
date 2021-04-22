@@ -13,6 +13,17 @@
             android:icon="@drawable/add_my_photo"
             android:title="@string/add_photo"
             app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/action_add"
+            android:icon="@drawable/add"
+            android:title="@string/add"
+            app:showAsAction="ifRoom"/>
+
+        <item
+            android:id="@+id/action_clear"
+            android:icon="@drawable/delete"
+            android:title="@string/delete"
+            app:showAsAction="ifRoom"/>
 
 
 </menu>

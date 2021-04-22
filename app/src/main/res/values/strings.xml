@@ -23,4 +23,9 @@
     <string name="about_app">о приложении</string>
     <string name="settings">настройки</string>
     <string name="about_my_app">Вы используете такое то приложение</string>
+    <string name="delete">delete</string>
+    <string name="add">add</string>
+    <string name="update">update</string>
+    <string name="title">введите заголовок вашей заметки</string>
+    <string name="description">введите текст вашей заметки</string>
 </resources>
